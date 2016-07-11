@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Voter;
 
 class VoterController extends Controller
 {
@@ -15,7 +16,9 @@ class VoterController extends Controller
      */
     public function index()
     {
-        //
+        $voters = Voter::all();
+
+        return view('voter.index', ['voters' => $voters]);
     }
 
     /**
@@ -25,7 +28,7 @@ class VoterController extends Controller
      */
     public function create()
     {
-        //
+        return view('voter.create');
     }
 
     /**
@@ -36,7 +39,17 @@ class VoterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $voter = new Voter;
+
+        $voter->colony = $request->colony;
+        $voter->name = $request->name;
+        $voter->fathers_name = $request->fathers_name;
+        $voter->serial_num = $request->voter_number;
+        $voter->mobile = $request->mobile;
+        $voter->epic_number = $request->epic_number;
+        $voter->save();
+
+        return redirect('/voter');
     }
 
     /**
