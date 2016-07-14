@@ -9,39 +9,29 @@
 
                 <div class="panel-body">
 
-                	@if (count($voters) > 0)
-                   		<table class="table table-stripped">
-                   			<thead>
-                   				<tr>
-                   					<th>#</th>
-                   					<th>Voter No.</th>
-                   					<th>Full Name</th>
-                   					<th>Father's Name</th>
-                   					<th>Epic No.</th>
-                   					<th>Mobile No.</th>
-                   					<th>Colony</th>
-                   				</tr>
-                   			</thead>
-                   			<tbody>
-                   				@for ($i = 0; $i < count($voters); $i++)
-                   					<tr>
-                   						<td>{{ $i + 1 }}</td>
-                   						<td>{{ $voters[$i]->serial_num }}</td>
-                   						<td>{{ $voters[$i]->name }}</td>
-                   						<td>{{ $voters[$i]->fathers_name }}</td>
-                   						<td>{{ $voters[$i]->epic_number }}</td>
-                   						<td>{{ $voters[$i]->mobile }} </td>
-                   						<td>{{ $voters[$i]->colony }}</td>
-                   					</tr>
-                   				@endfor
-                   			</tbody>
-                   			
-                   		</table>
-                    @endif
-                    <a class="btn btn-primary" href="/voter/create">Add a new voter</a>
+                    <form>
+                      <div class="form-group">
+                        <label for="colony">Colony</label>
+                        <select onchange="showData(this.value)" name="colony" class="form-control">
+                          <option value=""></option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                        </select>
+                      </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@if (count($voters) > 0)
+<div class="container">
+    @include('voter.list', ['voters' => $voters])
+</div>
+@endif
 @endsection
+
