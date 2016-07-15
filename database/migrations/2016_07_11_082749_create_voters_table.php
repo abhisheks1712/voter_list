@@ -19,7 +19,8 @@ class CreateVotersTable extends Migration
             $table->string('fathers_name', 100)->nullable();
             $table->string('epic_number', 30)->unique();            
             $table->char('mobile', 10);
-            $table->string('colony', 100);            
+            $table->string('colony', 100);   
+            $table->string('colony_hindi', 100);         
             $table->timestamps();
         });
     }
