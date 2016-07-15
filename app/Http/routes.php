@@ -23,7 +23,7 @@ Route::get('/home', 'HomeController@index');
 // Handling user request for voter data
 
 Route::get('/voter', 'VoterController@index');
-Route::get('/voter/{colony?}', 'VoterController@index');
+Route::get('/voter/search', 'VoterController@search');
 
 Route::get('/voter/create', 'VoterController@create');
 Route::post('/voter', 'VoterController@store');

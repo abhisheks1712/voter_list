@@ -12,20 +12,28 @@ class VoterController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param colony value $colony
      * @return \Illuminate\Http\Response
      */
-    public function index($colony = null)
+    public function index()
     {
-        
-        if ($colony != null)
-        {
-            $voters = Voter::where('colony', $colony)->get();
-        }
-        else
-        {
-            return view('voter.index');
-        }
+        return view('voter.index');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $colony = $request->input('colony');
+        $serial = $request->input('serial');
+        $epic = $request->input('epic');
+        $mobile = $request->input('mobile');
+
+        $voters = Voter::where('colony', $colony)->where('serial_num', 'like', $serial . '%')
+                    ->where('epic_number', 'like', $epic . '%')
+                    ->where('mobile', 'like', $mobile . '%')->get();
 
         return view('voter.list', ['voters' => $voters]);
     }
