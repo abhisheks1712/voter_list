@@ -12,13 +12,22 @@ class VoterController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param colony value $colony
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($colony = null)
     {
-        $voters = Voter::all();
+        
+        if ($colony != null)
+        {
+            $voters = Voter::where('colony', $colony)->get();
+        }
+        else
+        {
+            return view('voter.index');
+        }
 
-        return view('voter.index', ['voters' => $voters]);
+        return view('voter.list', ['voters' => $voters]);
     }
 
     /**
